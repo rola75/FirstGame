@@ -2,14 +2,20 @@
 // After I need to be able to put X in all the blocks on click
 
 
-const blocks = document.querySelectorAll(".blocks");
+const blocks = document.querySelectorAll(".section_button_block");
 //console.log(blocks);
 
 
+const handleBlockClicker = (event) => {
+    const element = event.target;
+    console.log("checking the handler click");
 
+    const letterInput = element.innerText;
+    console.log(letterInput);
 
-const blockDisplayer = blocks.forEach((block) => {
-    block.addEventListener("click", () =>{
-        console.log("click is working");
-    } );
-})
+    };
+
+const blockInput = blocks.forEach((block) => {
+    block.addEventListener("click", handleBlockClicker)});
+    //() =>{ console.log("click is working")});
+
