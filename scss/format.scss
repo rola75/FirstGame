@@ -1,0 +1,21 @@
+@use "./variables.scss";
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    background-color: variables.$background-color;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+section {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows:repeat(3, 1fr);
+    width: 90vw;
+    height: 90vh;
+    gap: 10px;
+}
