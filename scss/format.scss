@@ -5,10 +5,13 @@
     padding: 0;
     box-sizing: border-box;
     font-family: variables.$fontStyle;
-    font-size: 15vh;
+    font-size: 30px;
 }
 body {
     background-color: variables.$background-color;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 100vw;
     height: 100vh;
 }
@@ -25,3 +28,10 @@ section {
 .section_button_block {
     background-color: variables.$block-color;
 }
+
+@media screen and (min-width: 1000px) {
+    section { 
+        max-height: 782px;
+        max-width: 782px;
+    }
+} 
