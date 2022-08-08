@@ -1,126 +1,174 @@
-//The first thing I need is a boad for tic tac toe.
-// After I need to be able to put X in all the blocks on click
-//x is on the screen
-//how to get o on the screen
-//o is on the screen
-//how to switch between x and o
-//how to check column rows and diagonals
+// I need letter on the board
+//to get buttons on the board i need to be able to click and x or o to display
+/*when making click event to click on boxes and make x and o appears mean I
+need and event listener and I need a function that is an event handler*/
+//on click I need the letter to appear and I need them to change
 
 
 
-const blocks = document.querySelectorAll(".section_button_block");
-//console.log(blocks);
+const boardBlocks = document.querySelectorAll(".section_button_block");
+//console.log(clickToPlaceLetter);
 
-let rows = [
+
+let playerTurn = true;
+/*const winningGroups = [
+    [0,1,2],
+    [3,4,5],
+    [6,7,8],
+    [0,3,6],
+    [1,4,7],
+    [2,5,8],
+    [0,4,8],
+    [2,4,6],
+
+];*/
+
+
+let rowArrays = [
     [],
     [],
-    [],
-];//console.log(rows);
-
-let columns =[
-    [],
+    []
+];
+let columnArrays = [
     [],
     [],
-];//console.log(columns);
-
-let diagonals = [
+    []
+];
+let diagonalArrays = [
     [],
-    [],
-];//console.log(diagonals);
+    []
+];
 
 
+console.log(JSON.stringify(rowArrays));
+// console.log(columnArrays);
+// console.log(diagonalArrays);
 
-const handleBlockClicker = (event) => {
-    const blockText = event.target;
-    //console.log("checking the handler click" + blockText.innerText);
-    let letters = blockText.innerText;
-    let playerTurn = true;
+const handlerButtonClick = (e) => {
+    const blockText = e.target;
+    let letters = "";
 
-    if (letters != "") {
-        return;
+    if (blockText.innerText != "") {
+        return
     } else {
-        let letters = "";
-        if (playerTurn) { //if playerTurn is false O appears 
+        if (playerTurn) {
             letters = "X";
         } else {
             letters = "O";
         }
-        blockText.innerText = letters;
-        //playerTurn = !playerTurn
-        //console.log("here is letterinput" + letterInput)
-        //console.log("letters" + letters);
-        //console.log(letters)
     }
-
-
+    blockText.innerText = letters;
+    //console.log("inner", blockText.innerText);
+    //console.log(playerTurn, blockText.innerText,letters);
+    //console.log("playerTurn", playerTurn);
+    playerTurn = !playerTurn;
+    //console.log("playerTurnAfter", playerTurn);
+    // if(playerTurn == true){
+    //     playerTurn = false;
+    // }else {
+    //     playerTurn = true;
+    // }
 };
 
-blocks.forEach((block) => {
-    block.addEventListener("click", handleBlockClicker)
-});        
+for (let index = 0; index < boardBlocks.length; index++) {
+    boardBlocks[index].addEventListener("click", handlerButtonClick)
+};
 
-
-const createRowArrys = () => {
-    //console.log("blocks", blocks);
-   //console.log("blockLength", blocks.length);
-    blocks.forEach((index) => {
-        let currentRow = null;
-        //console.log("index", index);
-        if(index < 3) {
-            currentRow = rows[0];
-            //console.log("row", rows[0]);
-        } else if(index < 6) {
-            currentRow = rows[1];
-        } else{
-            currentRow = rows[2];
+const assignRows = () => {
+    for (let i = 0; i < boardBlocks.length; i++) {
+        let block = boardBlocks[i];
+        let currentArray;
+        if (i < 3) {
+            currentArray = rowArrays[0];
+        } else if (i < 6) {
+            currentArray = rowArrays[1];
+        } else {
+            currentArray = rowArrays[2];
         }
-        currentRow.push(blocks);
-        //console.log("currentArray" + blocks);
-    });    
+        currentArray.push(block);
+    }
 }
 
-// const createColumnsArry = () => {
-//     for(let index = 0; index < blocks.length; index++) {
-//     let currentColumn = null;
-//     if(index == 0 || index == 3 || index == 6){
-//         currentColumn = columns[0];
-//     } else if(index == 1 || index == 4 || index == 7) {
-//         currentColumn = columns[1];
+
+const checkColumns = () => {
+    for (let i = 0; i < boardBlocks.length; i++) {
+        let block = boardBlocks[i];
+        const columnIndex = i % 3;
+    
+        columnArrays[columnIndex].push(block);
+      
+    }
+};
+
+
+// const checkColumns = () => {
+//     for (let i = 0; i < boardBlocks.length; i++) {
+//         let block = boardBlocks[i];
+//         const columnIndex = i % 3;
+//         let currentArray = columnArrays[columnIndex]; 
+        
+//         // if ([0, 3, 6].includes(i)) {
+//         //     currentArray = columnArrays[0];
+//         // } else if ([1, 4, 7].includes(i)) {
+//         //     currentArray = columnArrays[1];
+//         // } else {
+//         //     currentArray = columnArrays[2];
+//         // }
+//         currentArray.push(block);
+//         //console.log("arr", JSON.stringify(currentArray));
 //     }
-//     }
+// };
+
+const rows = [
+    ["a", "b", "c"],
+    ["d", "e", "f"],
+    ["g", "h", "i"],
+
+]
+
+const getTopLeftToBottomRight = () => {
+    for (let i = 0; i < 3; i++) {
+        const rowIndex = i;
+        const columnIndex = i;
+    
+        const row = rowArrays[i];
+        const cell = row[columnIndex];
+    
+        console.log(`cell:`, cell)
+    }
+}
+
+
+const getTopRightToBottomLeft = () => {
+    for (let i = 0; i < 3; i++) {
+        const rowIndex = i;
+        const columnIndex = (rows.length - 1) - i;
+    
+        const row = rowArrays[i];
+        const cell = row[columnIndex];
+        
+        console.log(`cell:`, cell)
+    }
+}
+
+assignRows();
+checkColumns();
+getTopLeftToBottomRight();
+getTopRightToBottomLeft();
+
+// const checkDiagonals = () => {
+//     for(let i = 0; i < boardBlocks.length; i++){
+//         let currentArray;
+//         if([0,4,8].includes(i)){
+//             currentArray =  diagonalArrays[0];
+//         } else if([2,4,6].includes(i)){
+//             currentArray =  diagonalArrays[1];
+//         } else{          
+//         }
+//         currentArray.push(i);
+//         console.log("dia array", diagonalArrays)
+//     }   
 // }
-
-const createColumnsArry = () => {
-    for(let index = 0; index < blocks.length; index++) {
-    let currentColumn = null;
-    if([0,3,6].includes(index)){
-        currentColumn = columns[0];
-    } else if([1,4,7].includes(index)) {
-        currentColumn = columns[1];
-    } else {
-        currentColumn = columns[2];
-    } 
-    currentColumn.push(columns);
-    console.log("columns", currentColumn)
-    }
-};
-
-
-const createDiagonalsArrys = () => {
-    for(let index = 0; index < blocks.length; index++) {
-    let currentDiagonal = null;
-    if([0,4,8].includes(index)) {
-        currentDiagonal = diagonals[0];
-    } else if([2,4,6].includes(index)) {
-        currentDiagonal = diagonals[1];
-    } else {
-        return;
-    }
-    currentDiagonal.push(diagonals);
-    console.log("diagonals", currentDiagonal);
-    }
-};
-
-createRowArrys();
-createColumnsArry();
-createDiagonalsArrys();
+//checkDiagonals();
+//console.log("before", rowArrays);
+//console.log("after", rowArrays);
