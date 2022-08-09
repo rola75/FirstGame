@@ -1,13 +1,15 @@
+@import url("https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap");
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "cursive";
+  font-family: "Permanent Marker";
   font-size: 10vh;
 }
 
 body {
-  background-color: blue;
+  background-color: #2a3132;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -27,7 +29,7 @@ body {
 }
 
 .section_button_block {
-  background-color: grey;
+  background-color: #336b87;
 }
 
 .section_button_reset {
@@ -38,7 +40,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: red;
+  background-color: #763626;
 }
 
 .reset_button {

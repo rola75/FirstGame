@@ -7,6 +7,7 @@ need and event listener and I need a function that is an event handler*/
 
 
 const boardBlocks = document.querySelectorAll(".section_button_block");
+const resetButton = document.querySelector(".section_button_reset");
 //console.log(clickToPlaceLetter);
 
 
@@ -40,10 +41,6 @@ let diagonalArrays = [
 ];
 
 
-console.log(JSON.stringify(rowArrays));
-// console.log(columnArrays);
-// console.log(diagonalArrays);
-
 const handlerButtonClick = (e) => {
     const blockText = e.target;
     let letters = "";
@@ -58,16 +55,9 @@ const handlerButtonClick = (e) => {
         }
     }
     blockText.innerText = letters;
-    //console.log("inner", blockText.innerText);
-    //console.log(playerTurn, blockText.innerText,letters);
-    //console.log("playerTurn", playerTurn);
+    
     playerTurn = !playerTurn;
-    //console.log("playerTurnAfter", playerTurn);
-    // if(playerTurn == true){
-    //     playerTurn = false;
-    // }else {
-    //     playerTurn = true;
-    // }
+  
 };
 
 for (let index = 0; index < boardBlocks.length; index++) {
@@ -90,7 +80,7 @@ const assignRows = () => {
 }
 
 
-const checkColumns = () => {
+const assignColumns = () => {
     for (let i = 0; i < boardBlocks.length; i++) {
         let block = boardBlocks[i];
         const columnIndex = i % 3;
@@ -101,30 +91,17 @@ const checkColumns = () => {
 };
 
 
-// const checkColumns = () => {
-//     for (let i = 0; i < boardBlocks.length; i++) {
-//         let block = boardBlocks[i];
-//         const columnIndex = i % 3;
-//         let currentArray = columnArrays[columnIndex]; 
+const checkColumns = () => {
+    for (let i = 0; i < boardBlocks.length; i++) {
+        let block = boardBlocks[i];
+        const columnIndex = i % 3;
+        let currentArray = columnArrays[columnIndex]; 
         
-//         // if ([0, 3, 6].includes(i)) {
-//         //     currentArray = columnArrays[0];
-//         // } else if ([1, 4, 7].includes(i)) {
-//         //     currentArray = columnArrays[1];
-//         // } else {
-//         //     currentArray = columnArrays[2];
-//         // }
-//         currentArray.push(block);
-//         //console.log("arr", JSON.stringify(currentArray));
-//     }
-// };
+        currentArray.push(block);
+     
+    }
+};
 
-const rows = [
-    ["a", "b", "c"],
-    ["d", "e", "f"],
-    ["g", "h", "i"],
-
-]
 
 const getTopLeftToBottomRight = () => {
     for (let i = 0; i < 3; i++) {
@@ -132,9 +109,9 @@ const getTopLeftToBottomRight = () => {
         const columnIndex = i;
     
         const row = rowArrays[i];
-        const cell = row[columnIndex];
+        const block = row[columnIndex];
     
-        console.log(`cell:`, cell)
+        console.log(`block:`, block)
     }
 }
 
@@ -142,17 +119,25 @@ const getTopLeftToBottomRight = () => {
 const getTopRightToBottomLeft = () => {
     for (let i = 0; i < 3; i++) {
         const rowIndex = i;
-        const columnIndex = (rows.length - 1) - i;
+        const columnIndex = (rowArrays.length - 1) - i;
     
         const row = rowArrays[i];
-        const cell = row[columnIndex];
+        const block = row[columnIndex];
         
-        console.log(`cell:`, cell)
+        console.log(`block:`, block)
     }
 }
 
+
+const handlerReset = (event) => {
+    window.location.reload();
+}
+
+resetButton.addEventListener("click", handlerReset);
+
+
 assignRows();
-checkColumns();
+assignColumns();
 getTopLeftToBottomRight();
 getTopRightToBottomLeft();
 
