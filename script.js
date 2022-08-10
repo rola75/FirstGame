@@ -100,22 +100,12 @@ const getTopRightToBottomLeft = () => {
 
 
 const handlerReset = (event) => {
-    window.location.reload();
-}
-
-resetButton.addEventListener("click", handlerReset);
-
-const countLetterinArray = () => {
-    let letters = ["X", "O"];
-    boardBlocks.forEach((block, index) => {
-        const element = block.innerText;
-        if(element == letters[0]) {
-           console.log(letters[0])
-        }
+    boardBlocks.forEach((block) =>{
+        block.innerText = ""
     });
 }
 
-countLetterinArray();
+resetButton.addEventListener("click", handlerReset);
 
 assignRows();
 assignColumns();
